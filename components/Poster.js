@@ -21,7 +21,7 @@ function Poster({ track, chooseTrack }) {
     >
       <img
         src={track.albumUrl}
-        alt=""
+        alt={track.title}
         className="rounded-50 absolute inset-0 h-full w-full object-cover opacity-80 group-hover:opacity-100"
       />
       <div className="items.center absolute inset-x-0 bottom-10 ml-4 flex space-x-3.5">

@@ -9,7 +9,7 @@ function Search({ search, setSearch }) {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="border-none bg-[#1a1a1a] text-xs text-white placeholder-[#fafafa] outline-none focus:ring-0 lg:w-full"
-        placeholder="Search..."
+        placeholder="Artist, songs, or podcasts"
       />
 
       <div className="ml-auto flex items-center divide-x-2 divide-dotted divide-[#333]">

@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-black font-body scrollbar-hide;
+    @apply bg-black scrollbar-hide;
   }
 }
 
@@ -29,6 +29,9 @@
 
   .croppedIcon {
     clip-path: inset(0 50% 0 0);
+  }
+  .btn {
+    @apply w-full rounded-2xl bg-[#1A1A1A] bg-opacity-80 py-3.5 px-4 text-[13px] font-bold text-[#CECECE] transition ease-out hover:bg-opacity-100;
   }
 
   .playerIcon {
