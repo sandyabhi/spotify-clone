@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
 
-export default function RecentlyPlayed({ track, chooseTrack }) {
+function RecentlyPlayed({ track, chooseTrack }) {
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
@@ -18,16 +18,18 @@ export default function RecentlyPlayed({ track, chooseTrack }) {
       <img
         src={track.albumUrl}
         alt=""
-        className="h-[52px] w-[52px] rounded-full"
+        className="rounded-full w-[52px] h-[52px]"
       />
       <div>
-        <h4 className="mb-0.5 max-w-[150px] cursor-pointer truncate text-[13px] font-semibold text-white hover:underline">
+        <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
           {track.title}
         </h4>
-        <p className="cursor-pointer text-xs font-semibold text-[#686868] hover:underline">
+        <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
           {track.artist}
         </p>
       </div>
     </div>
   );
 }
+
+export default RecentlyPlayed;

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-//import SpotifyPlayer from "react-spotify-web-playback";
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
 import {
@@ -32,15 +31,15 @@ function Player({ accessToken, trackUri }) {
   };
 
   return (
-    <div className="relative flex items-center justify-between space-x-20 overflow-x-scroll rounded-t-2xl bg-[#181818] px-5 py-2.5 scrollbar-hide md:space-x-0 md:overflow-x-hidden">
+    <div className="bg-[#181818] flex items-center justify-between px-5 py-2.5 rounded-t-2xl relative space-x-20 md:space-x-0 overflow-x-scroll md:overflow-x-hidden scrollbar-hide">
       <div className="flex items-center">
         <img
           src={playingTrack.albumUrl}
           alt=""
-          className="mr-3 h-14 rounded-xl"
+          className="h-14 rounded-xl mr-3"
         />
         <div>
-          <h4 className="max-w-[150px] truncate text-sm text-white md:max-w-[250px]">
+          <h4 className="text-white text-sm max-w-[150px] md:max-w-[250px] truncate">
             {playingTrack.title}
           </h4>
           <h5 className="text-xs text-[rgb(179,179,179)]">
@@ -49,9 +48,9 @@ function Player({ accessToken, trackUri }) {
         </div>
       </div>
 
-      <div className="inset-x-auto flex w-full flex-col items-center space-y-2 md:absolute">
-        <div className="flex items-center space-x-4 text-xl text-[#b3b3b3]">
-          <BiShuffle className="playerIcon text-lg" />
+      <div className="flex flex-col space-y-2 items-center md:absolute inset-x-auto w-full">
+        <div className="flex items-center text-[#b3b3b3] text-xl space-x-4">
+          <BiShuffle className="text-lg playerIcon" />
           <BsFillSkipStartFill className="playerIcon" />
           <div
             onClick={handlePlay}
@@ -66,23 +65,24 @@ function Player({ accessToken, trackUri }) {
           <BsFillSkipEndFill className="playerIcon" />
           <IoRepeatOutline className="playerIcon" />
         </div>
+
         <div className="flex items-center space-x-2.5 text-xs text-[#CECECE]">
           <h4 className="-mt-0.5">0:00</h4>
-          <div className="h-1 w-72 rounded-xl bg-[#383838] lg:w-[450px]" />
+          <div className="bg-[#383838] w-72 lg:w-[450px] h-1 rounded-xl" />
           <h4 className="-mt-0.5">0:00</h4>
         </div>
       </div>
 
-      <div className="flex items-center space-x-3 text-[#b3b3b3]">
+      <div className="text-[#b3b3b3] flex items-center space-x-3">
         <RiPlayList2Fill className="playerIcon" />
-        <div className="playerIcon flex items-center">
+        <div className="flex items-center playerIcon">
           <RiComputerLine className="croppedIcon" />
           <MdOutlineSpeaker className="-ml-2.5" />
         </div>
         <div className="flex items-center space-x-3">
-          <FiVolume2 className="playerIcon text-xl text-[#b3b3b3]" />
-          <div className="h-1 w-[88px] rounded-xl bg-[#383838]">
-            <div className="h-1 w-14 rounded-xl bg-[#b3b3b3]" />
+          <FiVolume2 className="text-[#b3b3b3] text-xl playerIcon" />
+          <div className="bg-[#383838] w-[88px] h-1 rounded-xl">
+            <div className="bg-[#b3b3b3] w-14 h-1 rounded-xl" />
           </div>
         </div>
         <CgArrowsExpandRight className="playerIcon" />

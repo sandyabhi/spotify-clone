@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-
-import Search from "./Search";
+import { useEffect, useState } from "react";
 import Poster from "./Poster";
+import Search from "./Search";
 import Track from "./Track";
 
-function Body({ spotifyApi, chooseTrack }) {
-  const { data: session } = useSession("");
-  const accessToken = session?.accessToken;
-
-  // console.log(accessToken);
-
+function Body({ chooseTrack, spotifyApi }) {
+  const { data: session } = useSession();
+  const { accessToken } = session;
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [newReleases, setNewReleases] = useState([]);
@@ -25,7 +21,10 @@ function Body({ spotifyApi, chooseTrack }) {
     if (!search) return setSearchResults([]);
     if (!accessToken) return;
 
+    let cancel = false;
+
     spotifyApi.searchTracks(search).then((res) => {
+      if (cancel) return;
       setSearchResults(
         res.body.tracks.items.map((track) => {
           return {
@@ -39,6 +38,8 @@ function Body({ spotifyApi, chooseTrack }) {
         })
       );
     });
+
+    return () => (cancel = true);
   }, [search, accessToken]);
 
   // New Releases...
@@ -58,14 +59,12 @@ function Body({ spotifyApi, chooseTrack }) {
         })
       );
     });
-  }, [search, accessToken]);
-
-  console.log(newReleases);
+  }, [accessToken]);
 
   return (
-    <section className="ml-24 flex-grow space-y-8 bg-black py-4 md:mr-2.5 md:max-w-6xl">
-      <Search searct={search} setSearch={setSearch} />
-      <div className="grid h-96 grid-cols-2 gap-x-4 gap-y-8 overflow-y-scroll p-4 py-4 scrollbar-hide lg:grid-cols-3 xl:grid-cols-4">
+    <section className="bg-black ml-24 py-4 space-y-8 md:max-w-6xl flex-grow md:mr-2.5">
+      <Search search={search} setSearch={setSearch} />
+      <div className="grid overflow-y-scroll scrollbar-hide h-96 py-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-4">
         {searchResults.length === 0
           ? newReleases
               .slice(0, 4)
@@ -86,12 +85,12 @@ function Body({ spotifyApi, chooseTrack }) {
                 />
               ))}
       </div>
-      <div className="absolute ml-6 flex min-w-full gap-x-8 md:relative">
-        {/* Genres */}
-        <div className="hidden max-w-[270px] xl:inline">
-          <h2 className="mb-3 font-bold text-white">Genres</h2>
 
-          <div className="mb-3 flex flex-wrap gap-x-2 gap-y-2.5">
+      <div className="flex gap-x-8 absolute min-w-full md:relative ml-6">
+        {/* Genres */}
+        <div className="hidden xl:inline max-w-[270px]">
+          <h2 className="text-white font-bold mb-3">Genres</h2>
+          <div className="flex gap-x-2 gap-y-2.5 flex-wrap mb-3">
             <div className="genre">Classic</div>
             <div className="genre">House</div>
             <div className="genre">Minimal</div>
@@ -102,15 +101,17 @@ function Body({ spotifyApi, chooseTrack }) {
             <div className="genre">Country</div>
             <div className="genre">Techno</div>
           </div>
-          <button className="btn">All Genres</button>
+          <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
+            All Genres
+          </button>
         </div>
 
         {/* Tracks */}
         <div className="w-full pr-11">
-          <h2 className="mb-3 font-bold text-white">
+          <h2 className="text-white font-bold mb-3">
             {searchResults.length === 0 ? "New Releases" : "Tracks"}
           </h2>
-          <div className="scrollbar-thumb-rounded h-[1000px] w-[830px] space-y-3 overflow-y-scroll rounded-2xl border-2 border-[#262626] bg-[#0D0D0D] p-3 scrollbar-thin scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-500 md:h-96">
+          <div className="space-y-3 border-2 border-[#262626] rounded-2xl p-3 bg-[#0D0D0D] overflow-y-scroll h-[1000px] md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500 w-[830px]">
             {searchResults.length === 0
               ? newReleases
                   .slice(4, newReleases.length)

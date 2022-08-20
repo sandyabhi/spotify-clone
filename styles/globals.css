@@ -6,35 +6,32 @@
 
 @layer base {
   body {
-    @apply bg-black scrollbar-hide;
+    @apply font-body bg-black scrollbar-hide;
   }
 }
 
 @layer components {
   .sidebarIcon {
-    @apply h-6 cursor-pointer text-[#808080];
+    @apply h-6 text-[#808080] cursor-pointer;
   }
 
   .tag {
-    @apply rounded-xl border-2 border-[#484848] bg-[#282828] py-1.5 px-3 text-xs font-bold text-[#CECECE];
+    @apply py-1.5 px-3 text-[#CECECE] bg-[#282828] rounded-xl text-xs font-bold border-2 border-[#484848];
   }
 
   .genre {
-    @apply cursor-default rounded-xl border border-[#484848] bg-[#101010] py-2.5 px-3.5 text-[11px] font-bold text-[#CECECE];
+    @apply bg-[#101010] text-[#CECECE] border border-[#484848] rounded-xl py-2.5 px-3.5 text-[11px] font-bold cursor-default;
   }
 
   .icon {
-    @apply transition-all duration-150 ease-out hover:scale-125;
+    @apply hover:scale-125 transition-all duration-150 ease-out;
   }
 
   .croppedIcon {
     clip-path: inset(0 50% 0 0);
   }
-  .btn {
-    @apply w-full rounded-2xl bg-[#1A1A1A] bg-opacity-80 py-3.5 px-4 text-[13px] font-bold text-[#CECECE] transition ease-out hover:bg-opacity-100;
-  }
 
   .playerIcon {
-    @apply transform transition ease-out hover:scale-105 hover:text-white;
+    @apply transition ease-out transform hover:scale-105 hover:text-white;
   }
 }

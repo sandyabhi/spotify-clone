@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import {
   HiChartBar,
   HiOutlineClock,
@@ -7,7 +6,6 @@ import {
   HiHome,
   HiMicrophone,
 } from "react-icons/hi";
-//import { FaMicrophoneAlt } from "react-icons/fa";
 import { RiCompassFill } from "react-icons/ri";
 
 function Sidebar() {

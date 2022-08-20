@@ -1,7 +1,7 @@
 import { getProviders, signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Loader from "../../components/Loader";
 
@@ -15,12 +15,10 @@ function Signin({ providers }) {
     }
   }, [session]);
 
-  if (session) {
-    <Loader />;
-  }
+  if (session) return <Loader />;
 
   return (
-    <div className="flex h-screen flex-col items-center space-y-8 bg-black pt-40">
+    <div className="bg-black h-screen flex flex-col items-center pt-40 space-y-8">
       <Head>
         <title>Login - Spotify</title>
         <link rel="icon" href="/favicon.ico" />
@@ -35,7 +33,7 @@ function Signin({ providers }) {
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
           <button
-            className="rounded-full border border-transparent bg-[#1db954] py-4 px-6 text-xs font-bold uppercase tracking-wider text-white transition duration-300 ease-out hover:scale-105 hover:bg-[#0db146] md:text-base"
+            className="text-white py-4 px-6 rounded-full bg-[#1db954] transition duration-300 ease-out border border-transparent uppercase font-bold text-xs md:text-base tracking-wider hover:scale-105 hover:bg-[#0db146]"
             onClick={() => signIn(provider.id)}
           >
             Sign in with {provider.name}

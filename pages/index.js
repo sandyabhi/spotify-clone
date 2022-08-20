@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import Dashboard from "../components/Dashboard";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import Dashboard from "../components/Dashboard";
 import Loader from "../components/Loader";
 
 export default function Home() {
@@ -13,19 +13,17 @@ export default function Home() {
     },
   });
 
+  // Loading animation...
   if (status === "loading") {
     return <Loader />;
   }
 
-  // console.log(session);
-
   return (
-    <div>
+    <div className="">
       <Head>
-        <title>Spotify</title>
+        <title>Spotify - Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Dashboard />
     </div>
   );
